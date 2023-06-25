@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Generator</title>
+    <script
+  src="https://code.jquery.com/jquery-3.7.0.js"
+  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body onload="generateJoke()" class="bg-neutral-800">
+    <div class="grid place-items-center m-8">
+        <h1 class="text-red-500/100 text-6xl">Joke Generator</h1>
+        <div class="m-2 p-8 max-w-sm bg-white rounded-xl shadow-white space-x-4 grid place-items-center">
+            <p id="text"></p><br>
+            <p id="text2"></p>
+        </div>
+        <button class="rounded rounded-lg bg-red-500/100 p-2 text-white hover:bg-red-400/100" onclick="generateJoke()">Generate Joke</button>
+    </div>
+</body>
+<script>
+    // Jokes gotten from https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json
+    const resultText = $('#text')
+    const resultText2 = $('#text2')
+    
+    function generateJoke() {
+        const index = [Math.floor(Math.random()*405)]
+        $.getJSON('jokes.json', function(data) {
+            console.log(data);
+            resultText.text(data[index].setup);
+            resultText2.text(data[index].punchline);
+        });
+    }
+    
+</script>
+</html>
